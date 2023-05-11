@@ -1,0 +1,4 @@
+.idea
+/tests/kniga_lv/.pytest_cache
+/tests/mnogoknig_lv/.pytest_cache
+/allure_report
