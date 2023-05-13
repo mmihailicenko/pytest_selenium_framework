@@ -8,7 +8,8 @@ from framework.pages.kniga_lv.cart_popup import CartPopup
 class BookPage(BasePage):
     btn_add_to_cart = (By.CSS_SELECTOR, ".sticky-add-to-cart")
 
-    def add_to_cart(self):
+    @BasePage.wait_for_element(btn_add_to_cart)
+    def add_to_cart(self, element):
         with allure.step("clicking on the 'Add to Cart' button in the book page"):
-            self.click(self.btn_add_to_cart)
+            self.click_element(element)
         return CartPopup(self.driver)

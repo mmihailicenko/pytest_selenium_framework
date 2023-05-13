@@ -8,7 +8,8 @@ from framework.pages.mnogoknig_lv.cart_page import CartPage
 class Header(BasePage):
     cart_icon = (By.ID, "cart")
 
-    def go_to_cart(self):
+    @BasePage.wait_for_element(cart_icon)
+    def go_to_cart(self, element):
         with allure.step("clicking on the 'My Cart' link in the header"):
-            self.click(self.cart_icon)
+            self.click_element(element)
         return CartPage(self.driver)

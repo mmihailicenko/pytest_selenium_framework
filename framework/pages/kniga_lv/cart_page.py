@@ -9,14 +9,16 @@ class CartPage(BasePage):
     product_remove_btn = (By.CSS_SELECTOR, "a.remove")
     cart_empty = (By.CSS_SELECTOR, ".cart-empty")
 
-    def go_to_checkout(self):
+    @BasePage.wait_for_element(checkout_btn)
+    def go_to_checkout(self, element):
         with allure.step("clicking on the 'Go to Checkout' button in the cart page"):
-            self.click(self.checkout_btn)
+            self.click_element(element)
 
     def is_cart_empty(self) -> bool:
         with allure.step('checking if cart element exists'):
             return self.is_element_present(self.cart_empty)
 
-    def remove_cart_item(self):
+    @BasePage.wait_for_element(product_remove_btn)
+    def remove_cart_item(self, element):
         with allure.step('removing first single book from cart'):
-            self.click(self.product_remove_btn)
+            self.click_element(element)

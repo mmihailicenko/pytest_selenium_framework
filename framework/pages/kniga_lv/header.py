@@ -9,7 +9,8 @@ class Header(BasePage):
     random_book = (By.CSS_SELECTOR, ".mega-menu-item-62106")
     cart_icon = (By.CSS_SELECTOR, "a.header-cart-link")
 
-    def go_to_random_book(self):
+    @BasePage.wait_for_element(random_book)
+    def go_to_random_book(self, element):
         with allure.step("clicking on the 'Random Book' link in the header"):
-            self.click(self.random_book)
+            self.click_element(element)
         return BookPage(self.driver)

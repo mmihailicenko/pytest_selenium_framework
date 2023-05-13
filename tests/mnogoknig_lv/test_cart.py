@@ -1,10 +1,10 @@
 import allure
 
 
-@allure.title('Adding random book to cart')
-@allure.description('Navigating to a random book page and adding it to cart')
+@allure.title('Cart page is empty')
+@allure.description('Navigating to the cart, verifying it is empty')
 def test_add_random_book_to_cart(driver, website, header):
-    with allure.step("Clicking on 'Add to Cart' button for a random book"):
+    with allure.step("Navigating to the cart"):
         cart_page = (
             header.go_to_cart()
         )
