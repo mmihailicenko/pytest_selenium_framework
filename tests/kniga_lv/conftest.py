@@ -15,8 +15,8 @@ def header(driver):
     return Header(driver)
 
 
-username = 'mikhail.mihailicenko@gmail.com'#os.environ.get("USERNAME")
-password = 'Jer87ich0'#os.environ.get("PASSWORD")
+username = os.environ.get("USERNAME")
+password = os.environ.get("PASSWORD")
 
 
 @pytest.fixture(scope="function")
