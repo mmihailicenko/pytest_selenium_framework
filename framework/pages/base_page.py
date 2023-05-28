@@ -1,4 +1,4 @@
-from typing import Callable, Tuple
+from typing import Tuple, Callable
 
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.remote.webelement import WebElement
@@ -29,7 +29,7 @@ class BasePage:
         element.click()
 
     def find_element(self, identifier: tuple) -> WebElement:
-        return self.driver.find_element(*identifier)
+        return self.driver.find_element(identifier)
 
     def find_elements(self, identifier: tuple) -> list:
         return self.driver.find_elements(*identifier)
@@ -41,6 +41,6 @@ class BasePage:
             return False
         return True
 
-    def set_text(self, identifier: tuple, value: str) -> None:
-        element = self.find_element(identifier)
+    @staticmethod
+    def set_text(element: WebElement, value: str) -> None:
         element.send_keys(value)

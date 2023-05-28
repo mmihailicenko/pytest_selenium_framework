@@ -2,3 +2,11 @@
 /tests/kniga_lv/.pytest_cache
 /tests/mnogoknig_lv/.pytest_cache
 /allure_report
+framework/__pycache__/
+framework/core/__pycache__/
+framework/pages/__pycache__/
+framework/pages/kniga_lv/__pycache__/
+reports/
+tests/__pycache__/
+tests/kniga_lv/__pycache__/
+tests/kniga_lv/reports/

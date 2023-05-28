@@ -1,4 +1,4 @@
-image: selenium/hub:3
+image: docker:latest
 
 services:
   - docker:dind
@@ -6,13 +6,21 @@ services:
 before_script:
   - pip install -r requirements.txt
 
-  - docker run -d --name selenium-hub selenium/hub:3.141.59
-  - docker run -d --name chrome --link selenium-hub:hub selenium/node-chrome:3.141.59
+build:
+  stage: build
+  script:
+    - docker build -t pytest_selenium_framework .
+  artifacts:
+    paths:
+      - pytest_selenium_framework
 
 test:
+  stage: test
   script:
-    - pytest --alluredir allure-results tests/
-    - allure generate allure-results --clean -o allure-report
+    - docker run --pull always -d --network host --name selenium-hub selenium/hub:3.141.59
+    - docker run -d --name chrome --link selenium-hub:hub selenium/node-chrome:3.141.59
+    - docker run --rm --name pytest_selenium_framework -v $(pwd)/allure-results:/app/allure-results my_app_image:latest pytest --alluredir=/app/allure-results
+    - docker run --rm -v $(pwd)/allure-results:/app/allure-results -v $(pwd)/allure-report:/app/allure-report pytest_selenium_framework:latest allure generate /app/allure-results -o /app/allure-report --clean
   artifacts:
     reports:
       type: "external"
